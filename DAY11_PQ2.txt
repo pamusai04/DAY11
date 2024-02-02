@@ -1,0 +1,45 @@
+//Question 2
+//2.create a class rectangle and use inheratience to create another class cubiod.Try to reep it as close to real world scenario as possible
+//3.create methods for area and volume in 1
+//1.create a class circle and use inheritance to create another class cylinder from it.
+//4.create methods for area & volume in 2
+//create a class rectangle and use inheratience to create another class cubiod.Try to reep it as close to real world scenario as possible 
+// also create getters and setters 
+
+//5.what is the order of 
+class Rectangle{
+  int height;
+  int width;
+  Rectangle(){
+    System.out.println("I am non peram of Rectangle");
+  }
+   Rectangle(int height,int width){
+    System.out.println("I am Rectangle parameterized constuctor ");
+    this.height=height;
+    this.width=width;
+  }
+  double area(){
+    return height * width; 
+  }
+}
+class Cuboid extends Rectangle{
+  int length;
+  int height;
+  int width;
+  Cuboid(int length ,int height, int width){
+    super(height,width);
+    System.out.println("I am Cuboid parameterized constuctor ");
+    this.height=height;
+    this.width=width;
+    this.length=length;
+  }
+  double volume(){
+    return length * height * width; 
+  }
+}
+
+public class DAY11_PQ2 {
+  public static void main(String[] args) {
+    Cuboid c=new Cuboid(4,5,3);
+  }
+

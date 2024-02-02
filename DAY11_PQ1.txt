@@ -1,0 +1,36 @@
+//Question 1
+//1.create a class circle and use inheritance to create another class cylinder from it.
+import java.lang.Math;
+class Circle{
+	int radius;
+	Circle(){
+		System.out.println("I am non peram of circle");
+	}
+	 Circle(int r){
+		System.out.println("I am circle parameterized constuctor ");
+		radius=r;
+	}
+	double area(){
+		return Math.PI * this.radius * this.radius; 
+	}
+
+	
+}
+class Cylinder extends Circle{
+	int height;
+	Cylinder(int r,int h){
+		super(r);
+		System.out.println("I am Cylinder parameterized constuctor ");
+		height = h;
+	}
+	double volume(){
+		return Math.PI * this.radius * this.radius * this.height; 
+	}
+}
+
+
+class DAY11_PQ1  {
+    public static void main(String[] args) {
+        Cylinder obj=new Cylinder(12,4);
+    }
+}

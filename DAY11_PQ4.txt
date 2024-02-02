@@ -1,0 +1,63 @@
+//Question 4
+//4.create methods for area & volume in 2
+//create a class rectangle and use inheratience to create another class cubiod.Try to reep it as close to real world scenario as possible 
+// also create getters and setters 
+
+import java.lang.Math;
+
+class Circle {
+    int radius;
+
+    public int getRadius() {
+        return radius;
+    }
+
+    public void setRadius(int r) {
+        radius = r;
+    }
+
+    public double area() {
+        return Math.PI * this.radius * this.radius;
+    }
+}
+
+class Cylinder {
+    int height;
+    int radius;
+
+    public int getHeight() {
+        return height;
+    }
+
+    public int getRadius() {
+        return radius;
+    }
+
+    public void setHeight(int h) {
+        height = h;
+    }
+
+    public void setRadius(int r) {
+        radius = r;
+    }
+
+    double volume() {
+        return Math.PI * radius * radius * height;
+    }
+}
+
+public class DAY11_PQ4 {
+	public static void main(String[] args) {
+    		Circle a=new Circle();
+        	a.setRadius(5);
+		System.out.println("Radius : "+a.getRadius());
+        	System.out.println("Circle Area: " + a.area());
+	
+        	Cylinder v=new Cylinder();
+        	v.setRadius(5);
+		v.setHeight(10);
+		System.out.println("Radius : "+v.getRadius());
+		System.out.println("Radius : "+v.getHeight());
+    		System.out.println("Cylinder volume: " + v.volume());
+  }
+}

@@ -1,0 +1,39 @@
+//Question 3
+//3.create methods for area and volume in 1
+//1.create a class circle and use inheritance to create another class cylinder from it.
+import java.lang.Math;
+class Circle{
+  int radius;
+    public void CircleSetvalues(int r){
+    radius = r;
+
+  }
+    public double area(){
+        return Math.PI * this.radius * this.radius;  
+    }
+}
+
+class Cylinder{
+  int height;
+  int radius;
+    public void CylinderSetvalues(int h,int r){
+        height = h;
+        radius = r;
+    }
+    double volume(){
+        return Math.PI * this.radius * this.radius * this.height;  
+    }
+}
+
+public class DAY11_PQ3 {
+	public static void main(String[] args) {
+    Circle a=new Circle();
+        a.CircleSetvalues(5);
+        System.out.println("Circle Area: " + a.area());
+
+        Cylinder v=new Cylinder();
+        v.CylinderSetvalues(10,5);
+    System.out.println("Cylinder volume: " + v.volume());
+  }
+}
+
