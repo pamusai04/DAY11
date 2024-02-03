@@ -1,0 +1,163 @@
+//you have to implement a library using java class libarary
+//methods : addbook, issubook,returnBook,showAvailableBook
+//propertices : Array to store the available books,
+//Array to store the issued books
+
+
+public interface lib {
+	public void addbook();
+	public void issubook();
+	public void returnBook();
+	public void showAvailableBook();
+	
+}
+
+package saiWithCode;
+public class LibraryImpl implements Library {
+    private String[] availableBooks;
+    private String[] issuedBooks;
+    private int availableBooksCount;
+    private int issuedBooksCount;
+    private static final int INITIAL_CAPACITY = 50;
+
+    public LibraryImpl() {
+        availableBooks = new String[INITIAL_CAPACITY];
+        issuedBooks = new String[INITIAL_CAPACITY];
+        availableBooksCount = 0;
+        issuedBooksCount = 0;
+    }
+
+    public void addBook(String bookName) {
+        if (availableBooksCount == availableBooks.length) {
+            System.out.println("Cannot add more books. Library is full.");
+            return;
+        }
+        
+        availableBooks[availableBooksCount++] = bookName;
+        System.out.println("Book added successfully.");
+    }
+
+    public void issueBook(String bookName) {
+        if (availableBooksCount == 0) {
+            System.out.println("No available books to issue.");
+            return;
+        }
+
+        for (int i = 0; i < availableBooksCount; i++) {
+            if (availableBooks[i].equals(bookName)) {
+                if (issuedBooksCount == issuedBooks.length) {
+                    System.out.println("Cannot issue more books. Issued books limit reached.");
+                    return;
+                }
+
+                issuedBooks[issuedBooksCount++] = availableBooks[i];
+                removeBookFromAvailable(i);
+                System.out.println("Book issued successfully.");
+                return;
+            }
+        }
+
+        System.out.println("Book not available in the library.");
+    }
+
+    public void returnBook(String bookName) {
+        if (issuedBooksCount == 0) {
+            System.out.println("No books issued to return.");
+            return;
+        }
+
+        for (int i = 0; i < issuedBooksCount; i++) {
+            if (issuedBooks[i].equals(bookName)) {
+                if (availableBooksCount == availableBooks.length) {
+                    System.out.println("Cannot return more books. Available books limit reached.");
+                    return;
+                }
+
+                availableBooks[availableBooksCount++] = issuedBooks[i];
+                removeBookFromIssued(i);
+                System.out.println("Book returned successfully.");
+                return;
+            }
+        }
+
+        System.out.println("Book not issued from the library.");
+    }
+
+    public void showAvailableBooks() {
+        System.out.println("Available books:");
+        for (int i = 0; i < availableBooksCount; i++) {
+            System.out.println(availableBooks[i]);
+        }
+    }
+
+    private void removeBookFromAvailable(int index) {
+        for (int j = index; j < availableBooksCount - 1; j++) {
+            availableBooks[j] = availableBooks[j + 1];
+        }
+        availableBooksCount--;
+    }
+
+    private void removeBookFromIssued(int index) {
+        for (int j = index; j < issuedBooksCount - 1; j++) {
+            issuedBooks[j] = issuedBooks[j + 1];
+        }
+        issuedBooksCount--;
+    }
+}
+
+
+
+package saiWithCode;
+
+import java.util.*;
+
+public class user {
+    public static void main(String[] args) {
+        Library library = new LibraryImpl();
+        Scanner scanner = new Scanner(System.in);
+
+    
+        library.addBook("Book1");
+        library.addBook("Book2");
+        library.addBook("Book3");
+
+        System.out.println("Books added to the library.");
+
+        
+        while (true) {
+            System.out.println("Enter the operation number (1, 2, 3, 4):");
+            System.out.println("1. Add Book");
+            System.out.println("2. Issue Book");
+            System.out.println("3. Return Book");
+            System.out.println("4. Show Available Books");
+
+            int choice = scanner.nextInt();
+            scanner.nextLine(); // Consume the newline character
+
+            switch (choice) {
+                case 1:
+                    System.out.print("Enter the book name to add: ");
+                    String addBookName = scanner.nextLine();
+                    library.addBook(addBookName);
+                    break;
+                case 2:
+                    System.out.print("Enter the book name to issue: ");
+                    String issueBookName = scanner.nextLine();
+                    library.issueBook(issueBookName);
+                    break;
+                case 3:
+                    System.out.print("Enter the book name to return: ");
+                    String returnBookName = scanner.nextLine();
+                    library.returnBook(returnBookName);
+                    break;
+                case 4:
+                    library.showAvailableBooks();
+                    break;
+                default:
+                    System.out.println("Invalid choice. Please enter a number between 1 and 4.");
+            }
+
+            System.out.println(); // Add a newline for better readability
+        }
+    }
+}
